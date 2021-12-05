@@ -5,16 +5,16 @@ import { Router, Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-import Login from "./components/login.component";
-import Register from "./components/register.component";
-import Home from "./components/home.component";
-import Profile from "./components/profile.component";
-import BoardUser from "./components/board-user.component";
-import BoardModerator from "./components/board-moderator.component";
-import BoardAdmin from "./components/board-admin.component";
+import Login from "./components/LoginComponent";
+import Register from "./components/RegisterComponent";
+import Home from "./components/HomeComponent";
+import Profile from "./components/ProfileComponent";
+import BoardUser from "./components/UserBoardComponent";
+import BoardModerator from "./components/ModeratorBoardComponent";
+import BoardAdmin from "./components/AdminBoardComponent";
 
-import { logout } from "./actions/auth";
-import { clearMessage } from "./actions/message";
+import { logout } from "./actions/Auth";
+import { clearMessage } from "./actions/Message";
 
 import { history } from './helpers/history';
 
@@ -74,7 +74,7 @@ class App extends Component {
         <div>
           <nav className="navbar navbar-expand navbar-dark bg-dark">
             <Link to={"/"} className="navbar-brand">
-              bezKoder
+              Tech Blog
             </Link>
             <div className="navbar-nav mr-auto">
               <li className="nav-item">
