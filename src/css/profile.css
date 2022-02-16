@@ -1,0 +1,46 @@
+.profile-container{
+    box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06), 0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086), 0 100px 80px rgba(0, 0, 0, 0.12);
+    min-height: 520px;
+    background: white;
+    border-radius: 5px;
+    margin-top:80px;
+}
+
+.profile-left-wrapper{
+    margin:140px 0px;
+    text-align: center;
+}
+
+.profile-left-wrapper img{
+    display: block;
+    width: 50%;
+    height:120px;
+}
+
+.col-md-3{
+    border-right: 2px solid #eeeee4;
+}
+
+.profile-right-wrapper{
+    margin: 50px 0px;
+    padding:20px 40px;
+}
+
+.profile-left-wrapper .username{
+    font-size:25px;
+    display: block;
+}
+
+.profile-left-wrapper .user_role{
+    font-size:16px;
+    display: block;
+}
+
+.profile-container .profile-right-wrapper p{
+    font-size: 25px;
+    color: #999993;
+}
+
+.profile-container .profile-right-wrapper .user_id{
+    display: inline-block;
+}
