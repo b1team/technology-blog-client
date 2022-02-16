@@ -1,7 +1,7 @@
 import axios from "axios";
-import authHeader from "./AuthHeader";
+import authHeader from "./AuthHeader.js";
 
-const API_URL = "http://localhost:8080/api/v1/post";
+const API_URL = "http://127.0.0.1:8080/api/v1/post";
 
 class PostService {
     createPost(data) {
@@ -21,6 +21,12 @@ class PostService {
     }
     getAllPostsForUser() {
         return axios.post(API_URL + "/all/:user_id", { headers: authHeader() });
+    }
+    getTopTags() {
+        return axios.get("http://127.0.0.1:8080/api/v1/tag/all", { headers: authHeader() });
+    }
+    getPostwithTag(data) {
+        return axios.get(API_URL + "/tags/" + data, { headers: authHeader() });
     }
 }
 
