@@ -37,6 +37,11 @@ export default class BoardUser extends Component {
     );
   }
 
+  handlePost = (slug) => {
+    let { history } = this.props;
+    history.push("/post/" + slug);
+  }
+
   render() {
     return (
       <Container>

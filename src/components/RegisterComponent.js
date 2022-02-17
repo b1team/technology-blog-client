@@ -5,8 +5,9 @@ import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
 
 import { connect } from "react-redux";
-import { register } from "../actions/Auth";
+import { register } from "../actions/auth";
 import "../css/register.css";
+import imgBg from "../asset/dreamer.svg";
 
 const required = (value) => {
   if (!value) {
@@ -115,11 +116,13 @@ class Register extends Component {
     return (
       <div className="register-container">
         <div className="col-md-6">
-          <img
-            src="../asset/bg.jfif"
-            alt="bg-img"
-            className="bg-img"
-          />
+          <div className="login-background">
+            <img
+              src={imgBg}
+              alt="bg-img"
+              className="bg-img"
+            />
+          </div>
         </div>
         <div className="col-md-6">
           <div className="form-register">

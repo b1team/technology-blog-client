@@ -2,8 +2,35 @@ import React, { Component } from "react";
 import { Redirect } from 'react-router-dom';
 import { connect } from "react-redux";
 import "../css/profile.css";
+import UserService from "../services/UserService";
+import EventBus from "../common/EventBus";
+import Input from "react-validation/build/input";
+import Button from 'react-bootstrap/Button';
 
 class Profile extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      username: "",
+      email: "",
+      id: localStorage.user_id
+    };
+  }
+  onChangeUsername = (e) => {
+    this.setState({
+      username: e.target.value,
+    });
+  }
+  onChangeEmail = (e) => {
+    this.setState({
+      email: e.target.value,
+    });
+  }
+  handleUpdateUser = (e) => {
+    e.preventDefault();
+    UserService.updateProfile({ ...this.state }).then(() => { alert('ok') })
+  }
 
   render() {
     const { user: currentUser } = this.props;
@@ -33,11 +60,40 @@ class Profile extends Component {
         <div className="col-md-9">
           <div className="profile-right-wrapper">
             <p>User Profile: </p>
-            <div className="user_id">User Id: <span>{currentUser.id}</span></div>
-            <div className="name">Username: <span>{currentUser.username}</span>}</div>
-            <div className="email">Email: <span>{currentUser.email}</span></div>
-            <div className="role">Authority: {currentUser.roles &&
-              currentUser.roles.map((role, index) => <span key={index}>{role}</span>)}</div>
+            <div className="user-info-upper">
+              <div className="col-md-6">
+                <div className="name">
+                  Username: <input type="text" placeholder={currentUser.username} onChange={this.onChangeUsername} />
+                  {/* Username: <span>{currentUser.username}</span> */}
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="email">
+                  Email: <input type="text" placeholder={currentUser.email} onChange={this.onChangeEmail} />
+                  {/* Email: <span>{currentUser.email}</span> */}
+                </div>
+              </div>
+            </div>
+            <div className="user-info-bottom">
+              <p>Account Infomation: </p>
+              <div className="col-md-6">
+                <div className="user_id">
+                  User ID: <input type="text" placeholder={currentUser.id} />
+                  {/* Id: <span>{currentUser.id}</span> */}
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="role"
+                >Authority: {currentUser.roles &&
+                  currentUser.roles.map((role, index) => <span key={index}>{role}</span>)}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-3"></div>
+        <div className="col-md-6">
+          <div className="btnSaveUser">
+            <Button variant="primary" onClick={this.handleUpdateUser}>Save</Button>
           </div>
         </div>
       </div>

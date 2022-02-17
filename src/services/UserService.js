@@ -1,7 +1,7 @@
 import axios from "axios";
 import authHeader from "./AuthHeader";
 
-const API_URL = "http://localhost:8080/api/v1/user/";
+const API_URL = "http://localhost:8080/api/v1/user";
 const API_URL_POST = "http://localhost:8080/api/v1/post";
 class UserService {
   getPublicContent() {
@@ -13,11 +13,15 @@ class UserService {
   }
 
   getModeratorBoard() {
-    return axios.get(API_URL + "moderator-board", { headers: authHeader() });
+    return axios.get(API_URL + "/moderator-board", { headers: authHeader() });
   }
 
   getAdminBoard() {
-    return axios.get(API_URL + "admin-board", { headers: authHeader() });
+    return axios.get(API_URL + "/admin-board", { headers: authHeader() });
+  }
+
+  updateProfile(data) {
+    return axios.put(API_URL + "/update/profile", data, { headers: authHeader() });
   }
 }
 

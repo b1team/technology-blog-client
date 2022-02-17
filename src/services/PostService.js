@@ -13,8 +13,8 @@ class PostService {
     deletePost() {
         return axios.delete(API_URL + "/delete/:id", { headers: authHeader() });
     }
-    getSlug(data) {
-        return axios.get(API_URL + "/get/" + data, data, { headers: authHeader() });
+    getSlug(slug) {
+        return axios.get(API_URL + "/get/" + slug, { headers: authHeader() });
     }
     getAllPosts() {
         return axios.post(API_URL + "/all", { headers: authHeader() });

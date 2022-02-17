@@ -7,7 +7,8 @@ import CheckButton from "react-validation/build/button";
 import "../css/grid.css";
 import "../css/login.css"
 import { connect } from "react-redux";
-import { login } from "../actions/Auth";
+import { login } from "../actions/auth";
+import imgBg from "../asset/dreamer.svg";
 
 const required = (value) => {
   if (!value) {
@@ -84,11 +85,13 @@ class Login extends Component {
     return (
       <div className="login-container">
         <div className="col-md-6">
-          <img
-            src="../asset/bg.jfif"
-            alt="bg-img"
-            className="bg-img"
-          />
+          <div className="login-background">
+            <img
+              src={imgBg}
+              alt="bg-img"
+              className="bg-img"
+            />
+          </div>
         </div>
         <div className="col-md-6">
           <div className="form-login">
@@ -130,7 +133,7 @@ class Login extends Component {
 
               <div className="form-group">
                 <button
-                  className="btn btn-primary btn-block"
+                  className="btn btn-block"
                   disabled={this.state.loading}
                 >
                   {this.state.loading && (
