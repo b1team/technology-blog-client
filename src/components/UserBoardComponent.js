@@ -51,9 +51,40 @@ export default class BoardUser extends Component {
   }
 
   handleDelete = (id) => {
-    PostService.deletePost(id).then(() => { alert('ok') })
+    PostService.deletePost(id).then(() => {
+      this.reloadPage();
+    })
   }
+  reloadPage = () => {
+    UserService.getUserBoard(localStorage.user_id).then(
+      response => {
+        this.setState({
+          content: response.data
+        });
+      },
+      PostService.getTopTags().then(
+        response => {
+          this.setState({
+            tags: response.data
+          });
+        }
+      ),
+      error => {
+        this.setState({
+          content:
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString()
+        });
 
+        if (error.response && error.response.status === 401) {
+          EventBus.dispatch("logout");
+        }
+      }
+    )
+  }
   handleUpdate = () => {
     let { history } = this.props;
     history.push("/post/update");
