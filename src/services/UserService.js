@@ -20,11 +20,15 @@ class UserService {
   }
 
   getModeratorBoard() {
-    return axios.get(API_URL + "moderator-board", { headers: authHeader() });
+    return axios.get(API_URL + "/moderator-board", { headers: authHeader() });
   }
 
   getAdminBoard() {
-    return axios.get(API_URL + "admin-board", { headers: authHeader() });
+    return axios.get(API_URL + "/admin-board", { headers: authHeader() });
+  }
+
+  updateProfile(data) {
+    return axios.put(API_URL + "/update/profile", data, { headers: authHeader() });
   }
 }
 

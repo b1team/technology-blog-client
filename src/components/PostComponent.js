@@ -10,7 +10,6 @@ import { connect } from "react-redux";
 import { login } from "../actions/auth.js";
 */
 import PostService from "../services/PostService.js";
-//import EventBus from "../common/EventBus.js";
 
 const required = (value) => {
   if (!value) {

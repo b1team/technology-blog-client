@@ -30,3 +30,24 @@ label {
   -webkit-border-radius: 50%;
   border-radius: 50%;
 }
+.nav-header{
+  font-weight: 700;
+  display: block;
+  margin:0px 20px;
+  text-decoration: none;
+  color: #fff;
+  text-transform: uppercase;
+}
+.nav-header:hover{
+  color: #fff;
+  font-weight: 700;
+  display: block;
+  text-decoration: underline;
+}
+.background{
+  width:100%;
+}
+.background img{
+  width:100%;
+  display: block;
+}
