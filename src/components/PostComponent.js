@@ -34,6 +34,7 @@ export default class BoardPost extends Component {
       title: "",
       content: "",
       thumbnail: "",
+      tags: "",
       brief: "",
       user_id: localStorage.user_id
     };
@@ -42,6 +43,11 @@ export default class BoardPost extends Component {
   onChangeTitle = (e) => {
     this.setState({
       title: e.target.value,
+    });
+  }
+  onChangeTags = (e) => {
+    this.setState({
+      tags: e.target.value,
     });
   }
   onChangeContent = (e) => {
@@ -68,7 +74,8 @@ export default class BoardPost extends Component {
       title: null,
       content: null,
       thumbnail: null,
-      brief: null
+      brief: null,
+      tags: null
     })
   }
   render() {
@@ -91,6 +98,18 @@ export default class BoardPost extends Component {
               }}
             >
               <div className="form-group">
+                {/* <label htmlFor="thumbnail">Thumbnail</label> */}
+                <Input
+                  type="text"
+                  className="form-control"
+                  name="thumbnail"
+                  value={this.state.thumbnail || ""}
+                  onChange={this.onChangeThumbnail}
+                  validations={[required]}
+                  placeholder="Thumbnail"
+                />
+              </div>
+              <div className="form-group">
                 {/* <label htmlFor="password">Title</label> */}
                 <Input
                   type="text"
@@ -100,6 +119,30 @@ export default class BoardPost extends Component {
                   onChange={this.onChangeTitle}
                   validations={[required]}
                   placeholder="Title"
+                />
+              </div>
+              <div className="form-group">
+                {/* <label htmlFor="brief">Brief</label> */}
+                <Input
+                  type="text"
+                  className="form-control"
+                  name="brief"
+                  value={this.state.brief || ""}
+                  onChange={this.onChangeBrief}
+                  validations={[required]}
+                  placeholder="Brief"
+                />
+              </div>
+              <div className="form-group">
+                {/* <label htmlFor="brief">Brief</label> */}
+                <Input
+                  type="text"
+                  className="form-control"
+                  name="tags"
+                  value={this.state.tags || ""}
+                  onChange={this.onChangeTags}
+                  validations={[required]}
+                  placeholder="python, js, react"
                 />
               </div>
 
@@ -128,32 +171,6 @@ export default class BoardPost extends Component {
                 onChange={this.onChangeContent}
                 validations={[required]}
               /> */}
-              </div>
-
-              <div className="form-group">
-                {/* <label htmlFor="thumbnail">Thumbnail</label> */}
-                <Input
-                  type="text"
-                  className="form-control"
-                  name="thumbnail"
-                  value={this.state.thumbnail || ""}
-                  onChange={this.onChangeThumbnail}
-                  validations={[required]}
-                  placeholder="Thumbnail"
-                />
-              </div>
-
-              <div className="form-group">
-                {/* <label htmlFor="brief">Brief</label> */}
-                <Input
-                  type="text"
-                  className="form-control"
-                  name="brief"
-                  value={this.state.brief || ""}
-                  onChange={this.onChangeBrief}
-                  validations={[required]}
-                  placeholder="Brief"
-                />
               </div>
 
               <div className="form-group">
