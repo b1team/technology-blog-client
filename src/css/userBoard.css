@@ -1,0 +1,66 @@
+.userboard-inner {
+    padding: 10px;
+    margin-top: 10px;
+    border-bottom: 1px solid #999993;
+    height: 160px;
+}
+
+.userboard-inner img {
+    border-radius: 50%;
+    margin-top: 15px;
+}
+
+.userboard-inner .userboard-inline .userboard-id {
+    display: inline-block;
+    color: #5488c7;
+}
+
+.userboard-inner .userboard-inline .userboard-time {
+    display: inline-block;
+    color: #999993;
+}
+
+.userboard-inner .userboard-title {
+    font-size: 25px;
+    display: block;
+    font-weight: 500;
+}
+
+.userboard-inner .userboard-brief {
+    font-size: 13px;
+    display: block;
+}
+
+.userboard-inner .userboard-tag {
+    background-color: #5488c7;
+    width: 100px;
+    border-radius: 25px;
+    border: none;
+    text-align: center;
+    padding: 5px 20px;
+    margin-top: 10px;
+    text-transform: uppercase;
+
+}
+
+.userboard-inner .deleteBtn {
+    background-color: red;
+    color: #fff;
+    font-size: 16px;
+    width: 100px;
+    border: none;
+    border-radius: 25px;
+    padding: 5px 20px;
+    margin: 5px 0px;
+}
+
+.userboard-inner .updBtn {
+    background-color: #5488c7;
+    color: #fff;
+    font-size: 16px;
+    width: 100px;
+    border: none;
+    border-radius: 25px;
+    padding: 5px 20px;
+    margin: 5px 0px;
+}

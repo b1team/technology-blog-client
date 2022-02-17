@@ -28,6 +28,9 @@ class PostService {
     getPostwithTag(data) {
         return axios.get(API_URL + "/tags/" + data, { headers: authHeader() });
     }
+    getRandomPost() {
+        return axios.get(API_URL + "/random", { headers: authHeader() });
+    }
 }
 
 export default new PostService();

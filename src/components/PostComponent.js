@@ -154,6 +154,8 @@ export default class BoardPost extends Component {
                   data="Content"
                   onChange={(event, editor) => {
                     const data = editor.getData();
+                    console.log("__________");
+                    console.log(data);
                     this.setState({
                       content: data
                     })
