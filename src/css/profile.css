@@ -41,6 +41,22 @@
     color: #999993;
 }
 
-.profile-container .profile-right-wrapper .user_id{
+.profile-container .profile-right-wrapper .user-info-upper .name,  .profile-container .profile-right-wrapper .user-info-upper .email{
     display: inline-block;
+    font-weight: 700;
+    padding:20px;
+}
+
+.profile-container .profile-right-wrapper .user-info-bottom .user_id,  .profile-container .profile-right-wrapper .user-info-bottom .role{
+    display: inline-block;
+    font-weight: 700;
+    padding:20px;
+}
+
+.profile-container .profile-right-wrapper .user-info-bottom, .profile-container .profile-right-wrapper .user-info-upper{
+    border-bottom: 2px solid #999993;
+}
+.btnSaveUser Button{
+    width: 50%;
+    margin-top:80px;
 }
