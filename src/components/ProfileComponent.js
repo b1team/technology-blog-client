@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import "../css/profile.css";
 import UserService from "../services/UserService";
 import Button from 'react-bootstrap/Button';
+import EventBus from "../common/EventBus";
 
 class Profile extends Component {
   constructor(props) {
@@ -12,7 +13,10 @@ class Profile extends Component {
     this.state = {
       username: "",
       email: "",
-      id: localStorage.user_id
+      id: localStorage.user_id,
+      name: "",
+      phone_number: "",
+      reload: false
     };
   }
   onChangeUsername = (e) => {
@@ -33,6 +37,39 @@ class Profile extends Component {
         email: data.email
       });
     })
+  }
+
+  componentDidMount() {
+    this.reloadPage();
+  }
+
+  reloadPage = () => {
+    UserService.getUserById(this.state.id).then(
+      response => {
+        this.setState({
+          username: response.data.username,
+          email: response.data.email,
+          name: response.data.name,
+          phone_number: response.data.phone_number,
+          reload: true
+        });
+        console.log(response);
+      },
+      error => {
+        this.setState({
+          content:
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString()
+        });
+
+        if (error.response && error.response.status === 401) {
+          EventBus.dispatch("logout");
+        }
+      }
+    )
   }
 
   render() {
@@ -61,31 +98,33 @@ class Profile extends Component {
           </div>
         </div>
         <div className="col-md-9">
-          <div className="profile-right-wrapper">
-            <p>User Profile: </p>
-            <div className="user-info-upper">
-              <div className="col-md-6">
-                <div className="name">
-                  Username: <input type="text" placeholder={currentUser.username} onChange={this.onChangeUsername} />
-                  {/* Username: <span>{currentUser.username}</span> */}
+          {this.state.reload && (
+            <div className="profile-right-wrapper">
+              <p>User Profile: </p>
+              <div className="user-info-upper">
+                <div className="col-md-6">
+                  <div className="name">
+                    Username: <input type="text" value={this.state.username} onChange={this.onChangeUsername} />
+                    {/* Username: <span>{currentUser.username}</span> */}
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <div className="email">
+                    Email: <input type="text" value={this.state.email} onChange={this.onChangeEmail} />
+                    {/* Email: <span>{currentUser.email}</span> */}
+                  </div>
                 </div>
               </div>
-              <div className="col-md-6">
-                <div className="email">
-                  Email: <input type="text" placeholder={currentUser.email} onChange={this.onChangeEmail} />
-                  {/* Email: <span>{currentUser.email}</span> */}
+              <div className="user-info-bottom">
+                <p>Account Infomation: </p>
+                <div className="col-md-12">
+                  <div className="role"
+                  >Authority: {currentUser.roles &&
+                    currentUser.roles.map((role, index) => <span key={index}>{role}</span>)}</div>
                 </div>
               </div>
             </div>
-            <div className="user-info-bottom">
-              <p>Account Infomation: </p>
-              <div className="col-md-12">
-                <div className="role"
-                >Authority: {currentUser.roles &&
-                  currentUser.roles.map((role, index) => <span key={index}>{role}</span>)}</div>
-              </div>
-            </div>
-          </div>
+          )}
         </div>
         <div className="col-md-1"></div>
         <div className="col-md-6">

@@ -5,6 +5,9 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import "../css/post.css";
 /*
 import { connect } from "react-redux";
 import { login } from "../actions/auth.js";
@@ -12,7 +15,7 @@ import { login } from "../actions/auth.js";
 import PostService from "../services/PostService.js";
 
 const required = (value) => {
-  if (!value) {
+  if (value == null) {
     return (
       <div className="alert alert-danger" role="alert">
         This field is required!
@@ -58,9 +61,16 @@ export default class BoardPost extends Component {
   }
   handlePost = (e) => {
     e.preventDefault();
-    PostService.createPost({ ...this.state }).then(() => { alert('ok') })
+    PostService.createPost({ ...this.state }).then(() => { this.clearInput() })
   }
-
+  clearInput = () => {
+    this.setState({
+      title: null,
+      content: null,
+      thumbnail: null,
+      brief: null
+    })
+  }
   render() {
     const { isLoggedIn, message } = this.props;
 
@@ -69,95 +79,112 @@ export default class BoardPost extends Component {
     }
 
     return (
-      <div className="col-md-12">
-        <div className="card card-container">
-          <img
-            src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-            alt="profile-img"
-            className="profile-img-card"
-          />
+      <div className="post-wrapper">
+        <div className="col-md-1"></div>
+        <div className="col-md-10">
+          <div className="post-inner">
+            <h2>Post bài blog</h2>
+            <Form
+              onSubmit={this.handlePost}
+              ref={(c) => {
+                this.form = c;
+              }}
+            >
+              <div className="form-group">
+                {/* <label htmlFor="password">Title</label> */}
+                <Input
+                  type="text"
+                  className="form-control"
+                  name="title"
+                  value={this.state.title || ""}
+                  onChange={this.onChangeTitle}
+                  validations={[required]}
+                  placeholder="Title"
+                />
+              </div>
 
-          <Form
-            onSubmit={this.handlePost}
-            ref={(c) => {
-              this.form = c;
-            }}
-          >
-            <div className="form-group">
-              <label htmlFor="password">Title</label>
-              <Input
-                type="text"
-                className="form-control"
-                name="title"
-                value={this.state.title}
-                onChange={this.onChangeTitle}
-                validations={[required]}
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="content">Content</label>
-              <Input
+              <div className="form-group">
+                {/* <label htmlFor="content">Content</label> */}
+                <CKEditor
+                  editor={ClassicEditor}
+                  name="content"
+                  data="Content"
+                  onChange={(event, editor) => {
+                    const data = editor.getData();
+                    this.setState({
+                      content: data
+                    })
+                  }}
+                  data={this.state.content || ""}
+                  onFocus={(event, editor) => {
+                    console.log('Focus.', editor);
+                  }}
+                />
+                {/* <Input
                 type="text"
                 className="form-control"
                 name="content"
                 value={this.state.content}
                 onChange={this.onChangeContent}
                 validations={[required]}
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="thumbnail">Thumbnail</label>
-              <Input
-                type="text"
-                className="form-control"
-                name="email"
-                value={this.state.thumbnail}
-                onChange={this.onChangeThumbnail}
-                validations={[required]}
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="brief">Brief</label>
-              <Input
-                type="text"
-                className="form-control"
-                name="brief"
-                value={this.state.brief}
-                onChange={this.onChangeBrief}
-                validations={[required]}
-              />
-            </div>
-
-            <div className="form-group">
-              <button
-                className="btn btn-primary btn-block"
-                disabled={this.state.loading}
-              >
-                {this.state.loading && (
-                  <span className="spinner-border spinner-border-sm"></span>
-                )}
-                <span>Login</span>
-              </button>
-            </div>
-
-            {message && (
-              <div className="form-group">
-                <div className="alert alert-danger" role="alert">
-                  {message}
-                </div>
+              /> */}
               </div>
-            )}
-            <CheckButton
-              style={{ display: "none" }}
-              ref={(c) => {
-                this.checkBtn = c;
-              }}
-            />
-          </Form>
+
+              <div className="form-group">
+                {/* <label htmlFor="thumbnail">Thumbnail</label> */}
+                <Input
+                  type="text"
+                  className="form-control"
+                  name="thumbnail"
+                  value={this.state.thumbnail || ""}
+                  onChange={this.onChangeThumbnail}
+                  validations={[required]}
+                  placeholder="Thumbnail"
+                />
+              </div>
+
+              <div className="form-group">
+                {/* <label htmlFor="brief">Brief</label> */}
+                <Input
+                  type="text"
+                  className="form-control"
+                  name="brief"
+                  value={this.state.brief || ""}
+                  onChange={this.onChangeBrief}
+                  validations={[required]}
+                  placeholder="Brief"
+                />
+              </div>
+
+              <div className="form-group">
+                <button
+                  className="btn-primary btn-block"
+                  disabled={this.state.loading}
+                >
+                  {this.state.loading && (
+                    <span className="spinner-border spinner-border-sm"></span>
+                  )}
+                  <span>Post</span>
+                </button>
+              </div>
+
+              {message && (
+                <div className="form-group">
+                  <div className="alert alert-danger" role="alert">
+                    {message}
+                  </div>
+                </div>
+              )}
+              <CheckButton
+                style={{ display: "none" }}
+                ref={(c) => {
+                  this.checkBtn = c;
+                }}
+              />
+            </Form>
+          </div>
         </div>
+        <div className="col-md-1"></div>
       </div>
     );
   }
