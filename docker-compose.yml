@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+
+  frontend:
+    container_name: frontend
+    build: ./
+    volumes:
+      - './:/app'
+      - '/app/node_modules'
+    ports:
+      - 8081:8081
+    stdin_open: true
+    command: npm start
