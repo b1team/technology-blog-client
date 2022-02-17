@@ -28,8 +28,8 @@ export default class PostDetail extends Component {
                 )
                 this.setState({
                     content: response.data
-          
-                  });
+
+                });
             },
             error => {
                 this.setState({
@@ -50,38 +50,68 @@ export default class PostDetail extends Component {
 
     render() {
         return (
-            <div key="" className="home-container">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-lg-9 col-md-12 col-sm-12 col-xs-12">
-                                <h1 className="mt-4">{this.state.content.title}</h1>
-                                <p className="lead">
-                                by
-                                <p href="#">{this.state.username}</p>
-                                </p>
-                                <p>Posted on date {this.state.content.createdAt}</p>
-                                <div id="post-content" class="mb-4">
-                                    {this.state.content.content}
-                                </div>
-                                <div className="card my-4">
-                                <h5 className="card-header">Leave a Comment:</h5>
-                                <div className="card-body">
-                                    <form action="" method="POST">
-                                        <div className="form-group">
-                                            <textarea id="create_comment" name="comment" class="form-control" rows="3"></textarea>
-                                        </div>
-                                        <button type="submit" class=" btn-primary" onclick="addComment(); return false;">Submit</button>
-                                    </form>
-                                </div>
-                            </div>
+            <div className="postDetail-wrapped">
+                <div className="col-md-8">
+                    <div className="detail-title">
+                        {this.state.content.title}
+                    </div>
+                    <div className="detail-username">
+                        Created By {this.state.username}
+                    </div>
+                    <div className="detail-createdAt">
+                        {this.state.content.createdAt}
+                    </div>
+                    <div className="detail-content">
+                        {this.state.content.content}
+                    </div>
 
-                            <div id="comment-box">
-
+                </div>
+                <div className="col-md-4">RIGHT</div>
+                <div className="col-md-12">
+                    <h5 className="card-header">Leave a Comment:</h5>
+                    <div className="card-body">
+                        <form action="" method="POST">
+                            <div className="form-group">
+                                <textarea id="create_comment" name="comment" class="form-control" rows="3"></textarea>
                             </div>
-                        </div>
+                            <button type="submit" class=" btn-primary" onclick="addComment(); return false;">Submit</button>
+                        </form>
+                    </div>
+                    <div id="comment-box">
+
                     </div>
                 </div>
-                </div>
+            </div>
+            // <div key="" className="home-container">
+            //     <div className="container">
+            //         <div className="row">
+            //             <div className="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+            //                 <h1 className="mt-4">{this.state.content.title}</h1>
+            //                 <p className="lead">
+            //                     by
+            //                     <p href="#">{this.state.username}</p>
+            //                 </p>
+            //                 <p>Posted on date {this.state.content.createdAt}</p>
+            //                 {this.state.content.content}
+            //                 <div className="card my-4">
+            //                     <h5 className="card-header">Leave a Comment:</h5>
+            //                     <div className="card-body">
+            //                         <form action="" method="POST">
+            //                             <div className="form-group">
+            //                                 <textarea id="create_comment" name="comment" class="form-control" rows="3"></textarea>
+            //                             </div>
+            //                             <button type="submit" class=" btn-primary" onclick="addComment(); return false;">Submit</button>
+            //                         </form>
+            //                     </div>
+            //                 </div>
+
+            //                 <div id="comment-box">
+
+            //                 </div>
+            //             </div>
+            //         </div>
+            //     </div>
+            // </div>
         );
     }
 }

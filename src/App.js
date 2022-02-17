@@ -155,7 +155,7 @@ class App extends Component {
               className="bg-img"
             />
           </div>
-          <div className="container mt-6" style={{ minHeight: '600px' }}>
+          <div className="container" style={{ minHeight: '900px' }}>
             <Switch>
               <Route exact path={["/", "/home"]} component={Home} />
               <Route exact path="/login" component={Login} />
@@ -169,7 +169,23 @@ class App extends Component {
               <Route path="/post/update" component={PostUpdate} />
             </Switch>
           </div>
-
+          <div className="footer bg-dark">
+            <div className="col-md-2"></div>
+            <div className="col-md-8">
+              <ul>
+                <li>Sinh viên thực hiện</li>
+                <li>Phi Anh Tú - 18810310361</li>
+                <li>Nguyễn Tú Tùng - 18810310363</li>
+                <li>D13CNPM4</li>
+              </ul>
+            </div>
+            <div className="col-md-2"></div>
+            <div className="col-md-12">
+              <div className="footer-words">
+                Tech Blog developed by skirmish and tungnt
+              </div>
+            </div>
+          </div>
           {/* <AuthVerify logOut={this.logOut} /> */}
         </div>
       </Router >
