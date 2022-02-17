@@ -60,8 +60,8 @@ export default class Home extends Component {
     })
   }
   render() {
-    // console.log(this.state.content);
-    // console.log(this.state.tags);
+    console.log(this.state.content);
+    console.log(this.state.tags);
     console.log(this.state.post_tags);
     return (
       <Container>

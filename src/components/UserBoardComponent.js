@@ -65,8 +65,8 @@ export default class BoardUser extends Component {
                   <h3>{item.title}</h3>
                   <h6>{item.brief}</h6>
                   <h6>{item.createdAt}</h6>
-                  <button className="btn-1" onClick={() => this.handlePost(item.slug)}>Delete</button>
-                  <button className="btn-2" onClick={() => this.handlePost(item.slug)}>Update</button>
+                  <button className="btn-1" onClick={() => this.handlePost(item.id)}>Delete</button>
+                  <button className="btn-2" onClick={() => this.handlePost(item.id)}>Update</button>
                 </div>
               </div>
             </div>
