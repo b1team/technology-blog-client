@@ -177,7 +177,9 @@ class Register extends Component {
                   </div>
 
                   <div className="form-group">
-                    <button className="btn btn-primary btn-block">Sign Up</button>
+                    <div className="registerBtn">
+                      <button className="btn-primary btn-block">Sign Up</button>
+                    </div>
                   </div>
                 </div>
               )}

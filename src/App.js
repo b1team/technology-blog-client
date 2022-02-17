@@ -16,7 +16,7 @@ import BoardPost from "./components/PostComponent";
 import { logout } from "./actions/auth.js";
 import { clearMessage } from "./actions/message.js";
 import PostDetail from "./components/PostDetailComponent.js";
-
+import PostUpdate from "./components/PostUpdateComponent.js";
 import { history } from './helpers/history';
 
 // import AuthVerify from "./common/auth-verify";
@@ -166,6 +166,7 @@ class App extends Component {
               <Route path="/admin" component={BoardAdmin} />
               <Route path="/posts" component={BoardPost} />
               <Route path="/post/:slug" component={PostDetail} />
+              <Route path="/post/update" component={PostUpdate} />
             </Switch>
           </div>
 

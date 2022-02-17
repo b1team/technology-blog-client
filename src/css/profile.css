@@ -59,7 +59,15 @@
 .profile-container .profile-right-wrapper .user-info-bottom input, .profile-container .profile-right-wrapper .user-info-upper input{
     width:150px;
 }
-.btnSaveUser Button{
-    width: 50%;
-    margin-top:80px;
+.profile-container button{
+    width: 100%;
+    margin:80px 0px;
+    background-color: #5488c7;
+    color:#fff;
+    border:0;
+    border-radius: 50px;
+    box-shadow: 0 10px 10px rgb(0 0 0 / 20%);
+    font-size: 16px;
+    padding: 12px 25px;
+    letter-spacing: 1px;
 }
