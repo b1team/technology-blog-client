@@ -5,7 +5,7 @@ import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
 
 import { connect } from "react-redux";
-import { register } from "../actions/auth";
+import { register } from "../actions/auth.js";
 import "../css/register.css";
 import imgBg from "../asset/dreamer.svg";
 

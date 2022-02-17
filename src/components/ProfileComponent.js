@@ -3,8 +3,6 @@ import { Redirect } from 'react-router-dom';
 import { connect } from "react-redux";
 import "../css/profile.css";
 import UserService from "../services/UserService";
-import EventBus from "../common/EventBus";
-import Input from "react-validation/build/input";
 import Button from 'react-bootstrap/Button';
 
 class Profile extends Component {

@@ -13,10 +13,9 @@ import BoardUser from "./components/UserBoardComponent";
 import BoardModerator from "./components/ModeratorBoardComponent";
 import BoardAdmin from "./components/AdminBoardComponent";
 import BoardPost from "./components/PostComponent";
-import PostDetail from "./components/PostDetailComponent";
-
-import { logout } from "./actions/auth";
-import { clearMessage } from "./actions/message";
+import { logout } from "./actions/auth.js";
+import { clearMessage } from "./actions/message.js";
+import PostDetail from "./components/PostDetailComponent.js";
 
 import { history } from './helpers/history';
 

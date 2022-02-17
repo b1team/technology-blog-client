@@ -5,8 +5,11 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 
-import PostService from "../services/PostService";
-import EventBus from "../common/EventBus";
+/*
+import { connect } from "react-redux";
+import { login } from "../actions/auth.js";
+*/
+import PostService from "../services/PostService.js";
 
 const required = (value) => {
   if (!value) {

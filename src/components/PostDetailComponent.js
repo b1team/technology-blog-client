@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import "../css/home.css";
-import { Row, Col, Container } from 'react-bootstrap';
-import UserService from "../services/UserService";
-import PostService from "../services/PostService";
+import PostService from "../services/PostService.js";
 import EventBus from "../common/EventBus";
 
 export default class PostDetail extends Component {

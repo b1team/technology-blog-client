@@ -5,7 +5,7 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   SET_MESSAGE,
-} from "./types";
+} from "./types.js";
 
 import AuthService from "../services/AuthService";
 
