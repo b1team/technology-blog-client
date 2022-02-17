@@ -22,7 +22,7 @@ export default class Home extends Component {
         response.data.forEach(element => {
           PostService.getPostwithTag(element.id).then(
             response => {
-              element.tags = response.data["tags"][0];
+              element.tags = response.data["tags"];
             }
           )
         });
@@ -79,15 +79,15 @@ export default class Home extends Component {
             })}
           </Col>
           <Col sm={3}>
+          <div className="home-container">
           {this.state.tags.map(item => {
-              return <div className="home-container">
-              <div className="course">
+              return <div className="course">
                 <div className="course-info">
-                  <h6>{item.name}({item.count})</h6>
+                  <h6>{item.name} ({item.count})</h6>
                 </div>
               </div>
-            </div>
             })}
+            </div>
           </Col>
         </Row>
       </Container>

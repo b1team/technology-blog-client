@@ -49,7 +49,7 @@ export default class BoardUser extends Component {
     return (
       <Container>
         <Row>
-          <Col sm={9}>
+          <Col sm={12}>
             {this.state.content.map(item => {
               return <div key={item.id} className="home-container">
               <div className="course">
@@ -60,18 +60,8 @@ export default class BoardUser extends Component {
                   <h3>{item.title}</h3>
                   <h6>{item.brief}</h6>
                   <h6>{item.createdAt}</h6>
-                  <button className="btn" onClick={() => this.handlePost(item.slug)}>Read</button>
-                </div>
-              </div>
-            </div>
-            })}
-          </Col>
-          <Col sm={3}>
-          {this.state.tags.map(item => {
-              return <div className="home-container">
-              <div className="course">
-                <div className="course-info">
-                  <h6>{item.name}({item.count})</h6>
+                  <button className="btn-1" onClick={() => this.handlePost(item.slug)}>Delete</button>
+                  <button className="btn-2" onClick={() => this.handlePost(item.slug)}>Update</button>
                 </div>
               </div>
             </div>

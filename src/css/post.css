@@ -66,3 +66,30 @@
 	right: 10px;
 	letter-spacing: 1px;
 }
+
+
+.btn-1 {
+	background-color:red;
+	border: 0;
+	border-radius: 50px;
+	color: #fff;
+	font-size: 14px;
+	padding: 10px 25px;
+	position: absolute;
+	bottom: 80px;
+	right: 10px;
+	letter-spacing: 1px;
+}
+
+.btn-2 {
+	background-color: green;
+	border: 0;
+	border-radius: 50px;
+	color: #fff;
+	font-size: 14px;
+	padding: 10px 25px;
+	position: absolute;
+	bottom: 20px;
+	right: 10px;
+	letter-spacing: 1px;
+}
