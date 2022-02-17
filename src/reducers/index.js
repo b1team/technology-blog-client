@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import auth from "./Auth";
-import message from "./Message";
+import auth from "./auth.js";
+import message from "./message.js";
 
 export default combineReducers({
   auth,

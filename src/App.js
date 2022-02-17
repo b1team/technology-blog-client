@@ -12,14 +12,17 @@ import Profile from "./components/ProfileComponent";
 import BoardUser from "./components/UserBoardComponent";
 import BoardModerator from "./components/ModeratorBoardComponent";
 import BoardAdmin from "./components/AdminBoardComponent";
-
-import { logout } from "./actions/Auth";
-import { clearMessage } from "./actions/Message";
-
+import BoardPost from "./components/PostComponent";
+import { logout } from "./actions/auth.js";
+import { clearMessage } from "./actions/message.js";
+import PostDetail from "./components/PostDetailComponent.js";
+import PostUpdate from "./components/PostUpdateComponent.js";
 import { history } from './helpers/history';
 
 // import AuthVerify from "./common/auth-verify";
 import EventBus from "./common/EventBus";
+
+import backgroundImg from "../src/asset/background.png";
 
 class App extends Component {
   constructor(props) {
@@ -72,20 +75,20 @@ class App extends Component {
     return (
       <Router history={history}>
         <div>
-          <nav className="navbar navbar-expand navbar-dark bg-dark">
-            <Link to={"/"} className="navbar-brand">
+          <nav className="navbar navbar-expand bg-dark">
+            <Link to={"/"} className="navbar-brand nav-header">
               Tech Blog
             </Link>
             <div className="navbar-nav mr-auto">
               <li className="nav-item">
-                <Link to={"/home"} className="nav-link">
+                <Link to={"/home"} className="nav-header">
                   Home
                 </Link>
               </li>
 
               {showModeratorBoard && (
                 <li className="nav-item">
-                  <Link to={"/mod"} className="nav-link">
+                  <Link to={"/mod"} className="nav-header">
                     Moderator Board
                   </Link>
                 </li>
@@ -93,7 +96,7 @@ class App extends Component {
 
               {showAdminBoard && (
                 <li className="nav-item">
-                  <Link to={"/admin"} className="nav-link">
+                  <Link to={"/admin"} className="nav-header">
                     Admin Board
                   </Link>
                 </li>
@@ -101,8 +104,16 @@ class App extends Component {
 
               {currentUser && (
                 <li className="nav-item">
-                  <Link to={"/user"} className="nav-link">
+                  <Link to={"/user"} className="nav-header">
                     User
+                  </Link>
+                </li>
+              )}
+
+              {currentUser && (
+                <li className="nav-item">
+                  <Link to={"/posts"} className="nav-header">
+                    Post
                   </Link>
                 </li>
               )}
@@ -111,12 +122,12 @@ class App extends Component {
             {currentUser ? (
               <div className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  <Link to={"/profile"} className="nav-link">
+                  <Link to={"/profile"} className="nav-header">
                     {currentUser.username}
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <a href="/login" className="nav-link" onClick={this.logOut}>
+                  <a href="/login" className="nav-header" onClick={this.logOut}>
                     LogOut
                   </a>
                 </li>
@@ -124,21 +135,27 @@ class App extends Component {
             ) : (
               <div className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  <Link to={"/login"} className="nav-link">
+                  <Link to={"/login"} className="nav-header">
                     Login
                   </Link>
                 </li>
 
                 <li className="nav-item">
-                  <Link to={"/register"} className="nav-link">
+                  <Link to={"/register"} className="nav-header">
                     Sign Up
                   </Link>
                 </li>
               </div>
             )}
           </nav>
-
-          <div className="container mt-3">
+          <div className="background">
+            <img
+              src={backgroundImg}
+              alt="bg-img"
+              className="bg-img"
+            />
+          </div>
+          <div className="container mt-6" style={{ minHeight: '600px' }}>
             <Switch>
               <Route exact path={["/", "/home"]} component={Home} />
               <Route exact path="/login" component={Login} />
@@ -147,12 +164,15 @@ class App extends Component {
               <Route path="/user" component={BoardUser} />
               <Route path="/mod" component={BoardModerator} />
               <Route path="/admin" component={BoardAdmin} />
+              <Route path="/posts" component={BoardPost} />
+              <Route path="/post/:slug" component={PostDetail} />
+              <Route path="/post/update" component={PostUpdate} />
             </Switch>
           </div>
 
-          {/* <AuthVerify logOut={this.logOut}/> */}
+          {/* <AuthVerify logOut={this.logOut} /> */}
         </div>
-      </Router>
+      </Router >
     );
   }
 }

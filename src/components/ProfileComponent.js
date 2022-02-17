@@ -1,38 +1,136 @@
 import React, { Component } from "react";
 import { Redirect } from 'react-router-dom';
 import { connect } from "react-redux";
+import "../css/profile.css";
+import UserService from "../services/UserService.js";
+import EventBus from "../common/EventBus";
 
 class Profile extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      username: "",
+      email: "",
+      id: localStorage.user_id,
+      name: "",
+      phone_number: "",
+      reload: false
+    };
+  }
+  onChangeUsername = (e) => {
+    this.setState({
+      username: e.target.value,
+    });
+  }
+  onChangeEmail = (e) => {
+    this.setState({
+      email: e.target.value,
+    });
+  }
+  handleUpdateUser = (e) => {
+    e.preventDefault();
+    UserService.updateProfile({ ...this.state }).then((data) => {
+      this.setState({
+        username: data.username,
+        email: data.email
+      });
+    })
+  }
+
+  componentDidMount() {
+    this.reloadPage();
+  }
+
+  reloadPage = () => {
+    UserService.getUserById(this.state.id).then(
+      response => {
+        this.setState({
+          username: response.data.username,
+          email: response.data.email,
+          name: response.data.name,
+          phone_number: response.data.phone_number,
+          reload: true
+        });
+        console.log(response);
+      },
+      error => {
+        this.setState({
+          content:
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString()
+        });
+
+        if (error.response && error.response.status === 401) {
+          EventBus.dispatch("logout");
+        }
+      }
+    )
+  }
 
   render() {
     const { user: currentUser } = this.props;
-
+    console.log(currentUser);
     if (!currentUser) {
       return <Redirect to="/login" />;
     }
 
     return (
-      <div className="container">
-        <header className="jumbotron">
-          <h3>
-            <strong>{currentUser.username}</strong> Profile
-          </h3>
-        </header>
-        <p>
-          <strong>Token:</strong> {currentUser.accessToken.substring(0, 20)} ...{" "}
-          {currentUser.accessToken.substr(currentUser.accessToken.length - 20)}
-        </p>
-        <p>
-          <strong>Id:</strong> {currentUser.id}
-        </p>
-        <p>
-          <strong>Email:</strong> {currentUser.email}
-        </p>
-        <strong>Authorities:</strong>
-        <ul>
-          {currentUser.roles &&
-            currentUser.roles.map((role, index) => <li key={index}>{role}</li>)}
-        </ul>
+      <div className="profile-container">
+        <div className="col-md-3">
+          <div className="profile-left-wrapper">
+            <img
+              src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+              alt="profile-img"
+              className="profile-img-card"
+            />
+            <div className="username">
+              {currentUser.username}
+            </div>
+            <div className="user_role">
+              Role: {currentUser.roles &&
+                currentUser.roles.map((role, index) => <p key={index}>{role}</p>)}
+            </div>
+          </div>
+        </div>
+        <div className="col-md-9">
+          {this.state.reload && (
+            <div className="profile-right-wrapper">
+              <p>User Profile: </p>
+              <div className="user-info-upper">
+                <div className="col-md-6">
+                  <div className="name">
+                    Username: <input type="text" value={this.state.username} onChange={this.onChangeUsername} />
+                    {/* Username: <span>{currentUser.username}</span> */}
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <div className="email">
+                    Email: <input type="text" value={this.state.email} onChange={this.onChangeEmail} />
+                    {/* Email: <span>{currentUser.email}</span> */}
+                  </div>
+                </div>
+              </div>
+              <div className="user-info-bottom">
+                <p>Account Infomation: </p>
+                <div className="col-md-12">
+                  <div className="role"
+                  >Authority: {currentUser.roles &&
+                    currentUser.roles.map((role, index) => <span key={index}>{role}</span>)}</div>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+        <div className="col-md-1"></div>
+        <div className="col-md-6">
+          <div className="btnSaveUser">
+            <button className="saveProfileBtn" onClick={this.handleUpdateUser}>Save</button>
+          </div>
+        </div>
       </div>
     );
   }
