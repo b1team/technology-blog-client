@@ -54,11 +54,16 @@ export default class Home extends Component {
     );
   }
 
+  // handlePost = (slug) => {
+  //   PostService.getSlug(slug).then(response => {
+  //     alert(response.data.content);
+  //   })
+  // }
   handlePost = (slug) => {
-    PostService.getSlug(slug).then(response => {
-      alert(response.data.content);
-    })
+    let { history } = this.props;
+    history.push("/post/" + slug);
   }
+
   render() {
     console.log(this.state.content);
     console.log(this.state.tags);
@@ -74,11 +79,10 @@ export default class Home extends Component {
                     <img src={item.thumbnail} alt="none" className="img-fluid"></img>
                   </div>
                   <div className="course-info">
-                    <h3>{item.title}</h3>
+                    <h3 onClick={() => this.handlePost(item.slug)}>{item.title}</h3>
                     <h6>{item.brief}</h6>
                     <h6>TAG: {this.state.post_tags}</h6>
                     <h6>Date: {item.createdAt}</h6>
-                    <button className="btn" onClick={() => this.handlePost(item.slug)}>Read</button>
                   </div>
                 </div>
               </div>

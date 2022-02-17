@@ -27,7 +27,12 @@ class Profile extends Component {
   }
   handleUpdateUser = (e) => {
     e.preventDefault();
-    UserService.updateProfile({ ...this.state }).then(() => { alert('ok') })
+    UserService.updateProfile({ ...this.state }).then((data) => {
+      this.setState({
+        username: data.username,
+        email: data.email
+      });
+    })
   }
 
   render() {
@@ -74,13 +79,7 @@ class Profile extends Component {
             </div>
             <div className="user-info-bottom">
               <p>Account Infomation: </p>
-              <div className="col-md-6">
-                <div className="user_id">
-                  User ID: <input type="text" placeholder={currentUser.id} />
-                  {/* Id: <span>{currentUser.id}</span> */}
-                </div>
-              </div>
-              <div className="col-md-6">
+              <div className="col-md-12">
                 <div className="role"
                 >Authority: {currentUser.roles &&
                   currentUser.roles.map((role, index) => <span key={index}>{role}</span>)}</div>
@@ -88,10 +87,10 @@ class Profile extends Component {
             </div>
           </div>
         </div>
-        <div className="col-md-3"></div>
+        <div className="col-md-1"></div>
         <div className="col-md-6">
           <div className="btnSaveUser">
-            <Button variant="primary" onClick={this.handleUpdateUser}>Save</Button>
+            <button className="saveProfileBtn" onClick={this.handleUpdateUser}>Save</button>
           </div>
         </div>
       </div>

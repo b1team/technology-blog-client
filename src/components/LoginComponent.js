@@ -132,15 +132,17 @@ class Login extends Component {
               </div>
 
               <div className="form-group">
-                <button
-                  className="btn btn-block"
-                  disabled={this.state.loading}
-                >
-                  {this.state.loading && (
-                    <span className="spinner-border spinner-border-sm"></span>
-                  )}
-                  <span>Login</span>
-                </button>
+                <div className="loginBtn">
+                  <button
+                    className="btn-block"
+                    disabled={this.state.loading}
+                  >
+                    {this.state.loading && (
+                      <span className="spinner-border spinner-border-sm"></span>
+                    )}
+                    <span>Login</span>
+                  </button>
+                </div>
               </div>
 
               {message && (
