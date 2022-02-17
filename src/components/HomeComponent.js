@@ -92,9 +92,7 @@ export default class Home extends Component {
             <div className="home-container">
               {this.state.tags.map(item => {
                 return <div key={item.name} className="course">
-                  <div className="course-info">
-                    <h6>{item.name} ({item.count})</h6>
-                  </div>
+                  {item.count >= 1 && <div className="course-info"><h6>{item.name} ({item.count})</h6></div>}
                 </div>
               })}
             </div>
