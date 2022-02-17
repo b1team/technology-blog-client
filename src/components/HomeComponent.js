@@ -81,7 +81,7 @@ export default class Home extends Component {
                   <div className="course-info">
                     <h3 onClick={() => this.handlePost(item.slug)}>{item.title}</h3>
                     <h6>{item.brief}</h6>
-                    <h6>TAG: {this.state.post_tags}</h6>
+                    <h6>TAG: {item.post_tags}</h6>
                     <h6>Date: {item.createdAt}</h6>
                   </div>
                 </div>

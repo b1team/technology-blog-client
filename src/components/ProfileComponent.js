@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { Redirect } from 'react-router-dom';
 import { connect } from "react-redux";
 import "../css/profile.css";
-import UserService from "../services/UserService";
-import Button from 'react-bootstrap/Button';
+import UserService from "../services/UserService.js";
 import EventBus from "../common/EventBus";
 
 class Profile extends Component {
