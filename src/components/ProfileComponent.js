@@ -83,7 +83,8 @@ class Profile extends Component {
                 </div>
               </div>
               <div className="col-md-6">
-                <div className="role">Authority: {currentUser.roles &&
+                <div className="role"
+                >Authority: {currentUser.roles &&
                   currentUser.roles.map((role, index) => <span key={index}>{role}</span>)}</div>
               </div>
             </div>

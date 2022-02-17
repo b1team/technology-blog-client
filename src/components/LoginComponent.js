@@ -7,7 +7,7 @@ import CheckButton from "react-validation/build/button";
 import "../css/grid.css";
 import "../css/login.css"
 import { connect } from "react-redux";
-import { login } from "../actions/Auth";
+import { login } from "../actions/auth";
 import imgBg from "../asset/dreamer.svg";
 
 const required = (value) => {

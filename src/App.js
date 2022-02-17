@@ -15,8 +15,8 @@ import BoardAdmin from "./components/AdminBoardComponent";
 import BoardPost from "./components/PostComponent";
 import PostDetail from "./components/PostDetailComponent";
 
-import { logout } from "./actions/Auth";
-import { clearMessage } from "./actions/Message";
+import { logout } from "./actions/auth";
+import { clearMessage } from "./actions/message";
 
 import { history } from './helpers/history';
 
