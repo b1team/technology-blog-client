@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../css/home.css";
-import { Row, Col, Container } from 'react-bootstrap';
+//import { Row, Col, Container } from 'react-bootstrap';
 import UserService from "../services/UserService.js";
 import PostService from "../services/PostService.js";
 import "../css/post.css";

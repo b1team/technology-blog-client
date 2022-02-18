@@ -16,7 +16,7 @@ import BoardPost from "./components/PostComponent";
 import { logout } from "./actions/auth.js";
 import { clearMessage } from "./actions/message.js";
 import PostDetail from "./components/PostDetailComponent.js";
-import PostUpdate from "./components/PostUpdateComponent.js";
+//import PostUpdate from "./components/PostUpdateComponent.js";
 import { history } from './helpers/history';
 
 // import AuthVerify from "./common/auth-verify";

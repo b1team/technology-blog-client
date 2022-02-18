@@ -5,6 +5,7 @@ import UserService from "../services/UserService.js";
 import CommentService from "../services/CommentService.js";
 import EventBus from "../common/EventBus";
 import "../css/comment.css";
+import { Markup } from 'interweave';
 
 export default class PostDetail extends Component {
     constructor(props) {
@@ -12,9 +13,11 @@ export default class PostDetail extends Component {
 
         this.state = {
             content: [],
-            username: "",
-            user_id: "",
+            post_username: "",
+            post_user_id: "",
             comment: "",
+            username: localStorage.getItem("user")["username"],
+            user_id: localStorage.getItem("user_id"),
             post_id: 0,
             data_comment: []
         };
@@ -29,8 +32,8 @@ export default class PostDetail extends Component {
                         response.data.username = user_response.data['username'];
 
                         this.setState({
-                            username: response.data.username,
-                            user_id: response.data.user_id
+                            post_username: response.data.username,
+                            post_user_id: response.data.user_id
                         });
                         // console.log(this.state.user_id);
                     }
@@ -81,7 +84,7 @@ export default class PostDetail extends Component {
 
     handleComment = (e) => {
         e.preventDefault();
-        CommentService.comment({ ...this.state }).then(() => { this.clearInput(); this.reloadPage() })
+        CommentService.comment({"post_id": this.state.post_id, "comment": this.state.comment, "user_id": this.state.user_id}).then(() => { this.clearInput(); this.reloadPage() })
     }
 
     reloadPage = () => {
@@ -93,8 +96,8 @@ export default class PostDetail extends Component {
                         response.data.username = user_response.data['username'];
 
                         this.setState({
-                            username: response.data.username,
-                            user_id: response.data.user_id
+                            post_username: response.data.username,
+                            post_user_id: response.data.user_id
                         });
                         // console.log(this.state.user_id);
                     }
@@ -139,17 +142,19 @@ export default class PostDetail extends Component {
                         {this.state.content.title}
                     </div>
                     <div className="detail-username">
-                        Created By {this.state.username}
+                        Created By {this.state.post_username}
                     </div>
                     <div className="detail-createdAt">
                         {this.state.content.createdAt}
                     </div>
                     <div className="detail-content">
-                        {this.state.content.content}
+                    <Markup content={this.state.content.content} />
+                       
                     </div>
 
                 </div>
-                <div className="col-md-4">RIGHT</div>
+                <div className="col-md-4"></div>
+                
                 <div className="col-md-12">
                     <h5 className="card-header">Leave a Comment:</h5>
                     <div className="card-body">

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Container } from 'react-bootstrap';
+//import { Row, Col, Container } from 'react-bootstrap';
 import UserService from "../services/UserService";
 import EventBus from "../common/EventBus";
 import PostService from "../services/PostService.js";
