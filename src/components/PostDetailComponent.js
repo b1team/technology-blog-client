@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "../css/home.css";
 import PostService from "../services/PostService.js";
 import UserService from "../services/UserService.js";
+import CommentService from "../services/CommentService.js";
 import EventBus from "../common/EventBus";
 import "../css/comment.css";
 
@@ -11,25 +12,107 @@ export default class PostDetail extends Component {
 
         this.state = {
             content: [],
-            username: ""
+            username: "",
+            user_id: "",
+            comment: "",
+            post_id: 0,
+            data_comment: []
         };
     }
 
     componentDidMount() {
         PostService.getSlug(this.props.match.params.slug).then(
             response => {
+                // console.log(this.props);
                 UserService.getUserById(response.data.user_id).then(
                     user_response => {
                         response.data.username = user_response.data['username'];
+
                         this.setState({
                             username: response.data.username,
+                            user_id: response.data.user_id
                         });
+                        // console.log(this.state.user_id);
                     }
                 )
                 this.setState({
-                    content: response.data
-
+                    content: response.data,
+                    post_id: response.data.id
                 });
+                console.log("start");
+                console.log(this.state.post_id);
+                CommentService.getComment(this.state.post_id).then(
+                    data => {
+                        this.setState({
+                            data_comment: data.data
+                        })
+                        console.log(data.data);
+                    }
+                );
+            },
+            error => {
+                this.setState({
+                    content:
+                        (error.response &&
+                            error.response.data &&
+                            error.response.data.message) ||
+                        error.message ||
+                        error.toString()
+                });
+
+                if (error.response && error.response.status === 401) {
+                    EventBus.dispatch("logout");
+                }
+            }
+        );
+    }
+
+    onChangeComment = (e) => {
+        this.setState({
+            comment: e.target.value,
+        });
+    }
+
+    clearInput = () => {
+        this.setState({
+            comment: null
+        })
+    }
+
+    handleComment = (e) => {
+        e.preventDefault();
+        CommentService.comment({ ...this.state }).then(() => { this.clearInput(); this.reloadPage() })
+    }
+
+    reloadPage = () => {
+        PostService.getSlug(this.props.match.params.slug).then(
+            response => {
+                // console.log(this.props);
+                UserService.getUserById(response.data.user_id).then(
+                    user_response => {
+                        response.data.username = user_response.data['username'];
+
+                        this.setState({
+                            username: response.data.username,
+                            user_id: response.data.user_id
+                        });
+                        // console.log(this.state.user_id);
+                    }
+                )
+                this.setState({
+                    content: response.data,
+                    post_id: response.data.id
+                });
+                console.log("start");
+                console.log(this.state.post_id);
+                CommentService.getComment(this.state.post_id).then(
+                    data => {
+                        this.setState({
+                            data_comment: data.data
+                        })
+                        console.log(data.data);
+                    }
+                );
             },
             error => {
                 this.setState({
@@ -70,15 +153,37 @@ export default class PostDetail extends Component {
                 <div className="col-md-12">
                     <h5 className="card-header">Leave a Comment:</h5>
                     <div className="card-body">
-                        <form action="" method="POST">
+                        <form action="" method="POST" onSubmit={this.handleComment}>
                             <div className="form-group">
-                                <textarea id="create_comment" name="comment" class="form-control" rows="3"></textarea>
+                                <textarea id="create_comment" name="comment" className="form-control" rows="3"
+                                    onChange={this.onChangeComment}></textarea>
                             </div>
-                            <button type="submit" class=" btn-primary" onclick="addComment(); return false;">Submit</button>
+                            <button type="submit" className=" btn-primary" >Submit</button>
+                            {/* onClick={this.handleComment()} */}
+                            {/* onclick="addComment(); return false;" */}
                         </form>
                     </div>
                     <div id="comment-box">
-
+                        <h2>Bình luận</h2>
+                        {this.state.data_comment.map(item => {
+                            return <div key={item.id} className="comment-group">
+                                <div className="col-md-12">
+                                    <div className="comment-username">
+                                        <img src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="none" className="img-fluid" style={{ height: '40px' }}></img>
+                                        <div className="comment-username-detail">
+                                            {item.user.username}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-md-12">
+                                    <div className="comment-bottom">
+                                        <div className="comment-content">
+                                            {item.content}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        })}
                     </div>
                 </div>
             </div>
