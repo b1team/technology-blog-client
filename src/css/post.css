@@ -160,3 +160,35 @@
 	margin: 20px 0px;
 	color: #0f0f0f;
 }
+
+.random-wrapped {
+	margin-top: 40px;
+}
+
+.random-wrapped:hover {
+	cursor: pointer;
+}
+
+.random-group {
+	min-height: 80px;
+	margin: 10px 0px;
+	border-bottom: 1px solid #eeeee4;
+}
+
+.random-group img {
+	border-radius: 50%;
+	margin-top: 15px;
+	display: block;
+}
+
+.random-group .random-title {
+	font-size: 18px;
+	font-weight: 500;
+	display: block;
+}
+
+.random-group .random-time {
+	font-size: 14px;
+	font-weight: 300;
+	display: block;
+}

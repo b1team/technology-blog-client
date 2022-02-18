@@ -48,3 +48,7 @@
   text-transform: uppercase;
 
 }
+
+.home-group:hover {
+  cursor: pointer;
+}

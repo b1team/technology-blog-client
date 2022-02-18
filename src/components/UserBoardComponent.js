@@ -11,7 +11,8 @@ export default class BoardUser extends Component {
 
     this.state = {
       content: [],
-      tags: []
+      tags: [],
+      random_post: []
     };
   }
 
@@ -42,6 +43,16 @@ export default class BoardUser extends Component {
         if (error.response && error.response.status === 401) {
           EventBus.dispatch("logout");
         }
+      }
+    );
+    PostService.getRandomPost().then(
+      data => {
+        console.log("______________+__________");
+        console.log(data);
+        this.setState({
+          random_post: data["data"]
+        });
+        console.log(this.state.random_post);
       }
     );
   }
@@ -99,6 +110,7 @@ export default class BoardUser extends Component {
     return (
       <div className="userboard-wrapper">
         <div className="col-md-8">
+          <h2 style={{ margin: '30px' }}>Bài viết của tôi</h2>
           {this.state.content.map(item => {
             console.log("_________________");
             console.log(item);
@@ -146,7 +158,27 @@ export default class BoardUser extends Component {
           })}
         </div>
         <div className="col-md-4">
-          RANDOM POST
+          <h2 style={{ margin: '30px' }}>Các bài viết nổi bật</h2>
+          <div className="random-wrapped">
+            <h2>Các bài viết nổi bật</h2>
+            {this.state.random_post.map(item => {
+              return <div key={item.title} className="random-group" onClick={() => this.handlePost(item.slug)}>
+                <div className="col-md-3">
+                  <img src={item.thumbnail} alt="none" className="img-fluid"></img>
+                </div>
+                <div className="col-md-9">
+                  <div className="random-right">
+                    <div className="random-title">
+                      {item.title}
+                    </div>
+                    <div className="random-time">
+                      {item.brief}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            })}
+          </div>
         </div>
       </div>
       // <Container>

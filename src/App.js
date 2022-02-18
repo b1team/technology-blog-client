@@ -155,7 +155,7 @@ class App extends Component {
               className="bg-img"
             />
           </div>
-          <div className="container" style={{ minHeight: '900px' }}>
+          <div className="container" style={{ minHeight: '1100px' }}>
             <Switch>
               <Route exact path={["/", "/home"]} component={Home} />
               <Route exact path="/login" component={Login} />

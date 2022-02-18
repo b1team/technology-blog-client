@@ -58,7 +58,7 @@ export default class Home extends Component {
         console.log("______________+__________");
         console.log(data);
         this.setState({
-          random_post: data
+          random_post: data["data"]
         });
         console.log(this.state.random_post);
       }
@@ -76,9 +76,9 @@ export default class Home extends Component {
   }
 
   render() {
-    console.log(this.state.content);
-    console.log(this.state.tags);
-    console.log(this.state.post_tags);
+    // console.log(this.state.content);
+    // console.log(this.state.tags);
+    // console.log(this.state.post_tags);
     return (
       <div className="home-wrapper">
         <div className="col-md-8">
@@ -92,7 +92,7 @@ export default class Home extends Component {
               <div className="col-md-10">
                 <div className="home-group" onClick={() => this.handlePost(item.slug)}>
                   <div className="home-inline">
-                    <div class="home-id">
+                    <div className="home-id">
                       userId:{item.id}
                     </div>
                     <div className="home-time">
@@ -102,7 +102,7 @@ export default class Home extends Component {
                   <div className="home-title" >
                     {item.title}
                   </div>
-                  <div class="home-brief">
+                  <div className="home-brief">
                     {item.brief}
                   </div>
                   <div className="home-tag">
@@ -129,6 +129,26 @@ export default class Home extends Component {
               return <div key={item.name} className="course">
                 <div className="course-info">
                   <h6>{item.name} ({item.count})</h6>
+                </div>
+              </div>
+            })}
+          </div>
+          <div className="random-wrapped">
+            <h2>Các bài viết nổi bật</h2>
+            {this.state.random_post.map(item => {
+              return <div key={item.title} className="random-group" onClick={() => this.handlePost(item.slug)}>
+                <div className="col-md-3">
+                  <img src={item.thumbnail} alt="none" className="img-fluid"></img>
+                </div>
+                <div className="col-md-9">
+                  <div className="random-right">
+                    <div className="random-title">
+                      {item.title}
+                    </div>
+                    <div className="random-time">
+                      {item.brief}
+                    </div>
+                  </div>
                 </div>
               </div>
             })}
