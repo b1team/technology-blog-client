@@ -97,9 +97,9 @@ export default class BoardUser extends Component {
       }
     )
   }
-  handleUpdate = () => {
+  handleUpdate = (id) => {
     let { history } = this.props;
-    history.push("/post/update");
+    history.push("/update/" + id);
   }
   handleGet = (slug) => {
     let { history } = this.props;
@@ -114,7 +114,7 @@ export default class BoardUser extends Component {
           {this.state.content.map(item => {
             console.log("_________________");
             console.log(item);
-            return <div key={item.id} className="userboard-inner" onClick={() => this.handleGet(item.slug)}>
+            return <div key={item.id} className="userboard-inner">
               <div className="col-md-2">
                 <img src={item.thumbnail} alt="none" className="img-fluid" style={{ width: '200px' }}></img>
               </div>
@@ -125,7 +125,7 @@ export default class BoardUser extends Component {
                       {item.createdAt}
                     </div>
                   </div>
-                  <div className="userboard-title" >
+                  <div className="userboard-title" onClick={() => this.handleGet(item.slug)}>
                     {item.title}
                   </div>
                   <div className="userboard-brief">

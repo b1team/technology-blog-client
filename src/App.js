@@ -80,12 +80,12 @@ class App extends Component {
               Tech Blog
             </Link>
             <div className="navbar-nav mr-auto">
+              <input placeholder="Search" style={{ width: '200px', height: '30px' }}></input>
               <li className="nav-item">
                 <Link to={"/home"} className="nav-header">
                   Home
                 </Link>
               </li>
-
               {showModeratorBoard && (
                 <li className="nav-item">
                   <Link to={"/mod"} className="nav-header">
@@ -155,7 +155,7 @@ class App extends Component {
               className="bg-img"
             />
           </div>
-          <div className="container" style={{ minHeight: '1100px' }}>
+          <div className="container" style={{ minHeight: '2200px', overflowY: 'hidden' }}>
             <Switch>
               <Route exact path={["/", "/home"]} component={Home} />
               <Route exact path="/login" component={Login} />
@@ -166,7 +166,7 @@ class App extends Component {
               <Route path="/admin" component={BoardAdmin} />
               <Route path="/posts" component={BoardPost} />
               <Route path="/post/:slug" component={PostDetail} />
-              <Route path="/post/update" component={PostUpdate} />
+              <Route path="/update/:id" component={BoardPost} />
             </Switch>
           </div>
           <div className="footer bg-dark">

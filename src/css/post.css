@@ -192,3 +192,22 @@
 	font-weight: 300;
 	display: block;
 }
+
+.comment-group {
+	margin-top: 10px;
+	border-bottom: 1px solid #eeeee4;
+	min-height: 120px;
+}
+
+.comment-group .comment-username img {
+	border-radius: 50%;
+	margin-top: 15px;
+}
+
+.comment-group .comment-username .comment-username-detail {
+	display: inline-block;
+	font-size: 16px;
+	font-weight: 500;
+	margin: 20px 30px;
+	text-transform: capitalize;
+}

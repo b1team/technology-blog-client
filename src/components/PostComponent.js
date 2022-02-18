@@ -4,7 +4,9 @@ import { Redirect } from 'react-router-dom';
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-
+import UserService from "../services/UserService.js";
+import CommentService from "../services/CommentService.js";
+import EventBus from "../common/EventBus";
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import "../css/post.css";
@@ -39,7 +41,35 @@ export default class BoardPost extends Component {
       user_id: localStorage.user_id
     };
   }
+  componentDidMount() {
+    if (this.props.match.params.id != undefined) {
+      PostService.getPostById(this.props.match.params.id).then(
+        response => {
+          console.log(response);
+          this.setState({
+            thumbnail: response.data.thumbnail,
+            title: response.data.title,
+            brief: response.data.brief,
+            content: response.data.content
+          })
+        },
+        error => {
+          this.setState({
+            content:
+              (error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+              error.message ||
+              error.toString()
+          });
 
+          if (error.response && error.response.status === 401) {
+            EventBus.dispatch("logout");
+          }
+        }
+      );
+    }
+  }
   onChangeTitle = (e) => {
     this.setState({
       title: e.target.value,
@@ -67,7 +97,39 @@ export default class BoardPost extends Component {
   }
   handlePost = (e) => {
     e.preventDefault();
-    PostService.createPost({ ...this.state }).then(() => { this.clearInput() })
+    if (this.props.match.params.id != undefined) {
+      PostService.updatePost({ ...this.state, id: this.props.match.params.id }).then(() => { this.clearInput(); this.reloadPage(); alert('ok') })
+    } else {
+      PostService.createPost({ ...this.state }).then(() => { this.clearInput(); this.reloadPage(); alert('') })
+    }
+  }
+  reloadPage = () => {
+    PostService.getPostById(this.props.match.params.id).then(
+      response => {
+        console.log(response);
+        this.setState({
+          thumbnail: response.data.thumbnail,
+          title: response.data.title,
+          brief: response.data.brief,
+          content: response.data.content
+        })
+      },
+      error => {
+        this.setState({
+          content:
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString()
+        });
+
+        if (error.response && error.response.status === 401) {
+          EventBus.dispatch("logout");
+        }
+      }
+    );
+
   }
   clearInput = () => {
     this.setState({
